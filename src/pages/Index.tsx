@@ -39,7 +39,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <header className="bg-secondary shadow-sm">
-        <div className="container mx-auto px-2 py-2 flex justify-end">
+        <div className="container mx-auto px-2 py-2 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-primary">QRIXISSHOP</h1>
           <CartButton itemCount={cartItems.length} />
         </div>
       </header>

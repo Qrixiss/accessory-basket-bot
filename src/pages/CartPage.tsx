@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 const CartPage = () => {
   const location = useLocation();
-  
+
   // Загружаем корзину из localStorage при инициализации компонента
   const loadCartItems = () => {
     const savedCartItems = localStorage.getItem('cartItems');
@@ -53,6 +53,7 @@ const CartPage = () => {
                   <img src={item.image} alt={item.name} className="w-16 h-16 mr-4" />
                   <div className="flex-1">
                     <p className="font-semibold">{item.name}</p>
+                    <p>{item.description}</p>
                     <p>Цена: {item.price} руб.</p>
                   </div>
                   {/* Кнопка удаления товара */}

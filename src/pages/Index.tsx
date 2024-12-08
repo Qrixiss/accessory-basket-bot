@@ -1,39 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import ProductCard from '@/components/ProductCard';
 import CartButton from '@/components/CartButton';
 
 const products = [
   {
     id: 2,
-    name: "цепочка SEXSOUND W",
+    name: 'Цепочка SEXSOUND W',
+    description: 'Стильная женская цепочка, идеально подходит для вечернего наряда.',
     price: 2500,
-    image: "/imgs/woman.jpg",
+    image: '/imgs/woman.jpg',
   },
   {
     id: 3,
-    name: "цепочка SEXSOUND M",
+    name: 'Цепочка SEXSOUND M',
+    description: 'Мужская цепочка, созданная для любителей элегантности.',
     price: 2500,
-    image: "/imgs/man.jpg",
+    image: '/imgs/man.jpg',
   },
 ];
 
 const Index = () => {
-  // Загружаем корзину из localStorage при инициализации компонента
-  const loadCartItems = () => {
-    const savedCartItems = localStorage.getItem('cartItems');
-    return savedCartItems ? JSON.parse(savedCartItems) : [];
-  };
+  const [cartItems, setCartItems] = useState<number[]>([]);
 
-  const [cartItems, setCartItems] = useState<any[]>(loadCartItems);
-
-  const handleAddToCart = (product: { id: number, name: string, price: number, image: string }) => {
-    // Добавляем товар в корзину
-    const updatedCartItems = [...cartItems, product];
-    setCartItems(updatedCartItems);
-    
-    // Сохраняем обновленную корзину в localStorage
-    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+  const handleAddToCart = (productId: number) => {
+    setCartItems([...cartItems, productId]);
   };
 
   return (
@@ -41,10 +31,7 @@ const Index = () => {
       <header className="bg-secondary shadow-sm">
         <div className="container mx-auto px-2 py-2 flex justify-between items-center">
           <h1 className="text-xl font-bold text-primary">QRIXISSHOP</h1>
-          {/* Передаем в корзину полные данные о товарах */}
-          <Link to="/cart" state={{ cartItems }}>
-            <CartButton itemCount={cartItems.length} />
-          </Link>
+          <CartButton itemCount={cartItems.length} />
         </div>
       </header>
 
@@ -53,9 +40,13 @@ const Index = () => {
           {products.map((product) => (
             <ProductCard
               key={product.id}
-              {...product}
-              onAddToCart={() => handleAddToCart(product)} // Передаем весь объект продукта
-              isInCart={cartItems.some(item => item.id === product.id)} // Проверяем, добавлен ли товар в корзину
+              id={product.id}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              image={product.image}
+              onAddToCart={handleAddToCart}
+              isInCart={cartItems.includes(product.id)}
             />
           ))}
         </div>

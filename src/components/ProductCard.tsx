@@ -1,17 +1,18 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Check } from 'lucide-react';
 
 interface ProductCardProps {
   id: number;
   name: string;
   price: number;
   image: string;
+  isInCart: boolean;
   onAddToCart: (id: number) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, onAddToCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, isInCart, onAddToCart }) => {
   const { toast } = useToast();
 
   const handleAddToCart = () => {
@@ -32,10 +33,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, onAdd
           onClick={handleAddToCart}
           className="w-full bg-primary hover:bg-primary/90 text-white text-sm py-1"
           size="sm"
+          disabled={isInCart}
         >
-          <ShoppingCart className="mr-1 h-3 w-3" />
-          В корзину
+          {isInCart ? (
+            <Check className="mr-1 h-3 w-3" />
+          ) : (
+            <ShoppingCart className="mr-1 h-3 w-3" />
+          )}
+          {isInCart ? "В корзине" : "В корзину"}
         </Button>
+        {isInCart && (
+          <p className="text-xs text-green-600 mt-1">Товар добавлен в корзину</p>
+        )}
       </div>
     </div>
   );

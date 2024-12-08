@@ -52,6 +52,7 @@ const Index = () => {
               key={product.id}
               {...product}
               onAddToCart={handleAddToCart}
+              isInCart={cartItems.includes(product.id)}
             />
           ))}
         </div>

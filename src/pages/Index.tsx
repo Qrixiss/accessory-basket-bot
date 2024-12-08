@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductCard from '@/components/ProductCard';
 import CartButton from '@/components/CartButton';
 
 const products = [
-
   {
     id: 2,
     name: "цепочка SEXSOUND W",
@@ -16,7 +16,6 @@ const products = [
     price: 2500,
     image: "/imgs/man.jpg",
   },
-
 ];
 
 const Index = () => {
@@ -31,7 +30,10 @@ const Index = () => {
       <header className="bg-secondary shadow-sm">
         <div className="container mx-auto px-2 py-2 flex justify-between items-center">
           <h1 className="text-xl font-bold text-primary">QRIXISSHOP</h1>
-          <CartButton itemCount={cartItems.length} />
+          {/* Используем Link для перехода на страницу корзины */}
+          <Link to="/cart" state={{ cartItems }}>
+            <CartButton itemCount={cartItems.length} />
+          </Link>
         </div>
       </header>
 

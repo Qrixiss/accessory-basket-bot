@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ProductCard from '@/components/ProductCard';
 import CartButton from '@/components/CartButton';
 
-// Моковые данные для примера
 const products = [
   {
     id: 1,
@@ -38,8 +37,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-secondary/30">
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen bg-white">
+      <header className="bg-secondary shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary">Аксессуары</h1>
           <CartButton itemCount={cartItems.length} />

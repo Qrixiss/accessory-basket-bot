@@ -23,10 +23,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, onAdd
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 border border-secondary">
       <img src={image} alt={name} className="w-full h-48 object-cover" />
       <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{name}</h3>
+        <h3 className="text-lg font-semibold mb-2 text-primary">{name}</h3>
         <p className="text-primary mb-4">{price} ₽</p>
         <Button 
           onClick={handleAddToCart}

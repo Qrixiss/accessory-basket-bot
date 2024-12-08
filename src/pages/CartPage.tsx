@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 const CartPage = () => {
   const location = useLocation();
-  const { cartItems } = location.state || { cartItems: [] }; // получаем данные корзины из state
+  const cartItems = location.state?.cartItems || [];  // Получаем товары из state
 
   return (
     <div className="min-h-screen bg-white">
@@ -20,8 +20,15 @@ const CartPage = () => {
           <div>
             <h2 className="text-lg font-semibold">Товары в корзине:</h2>
             <ul>
-              {cartItems.map((item: number, index: number) => (
-                <li key={index}>Товар ID: {item}</li>
+              {cartItems.map((item, index) => (
+                <li key={index} className="flex items-center mb-4">
+                  {/* Картинка товара */}
+                  <img src={item.image} alt={item.name} className="w-16 h-16 mr-4" />
+                  <div>
+                    <p className="font-semibold">{item.name}</p>
+                    <p>Цена: {item.price} руб.</p>
+                  </div>
+                </li>
               ))}
             </ul>
           </div>

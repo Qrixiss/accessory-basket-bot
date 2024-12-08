@@ -19,10 +19,10 @@ const products = [
 ];
 
 const Index = () => {
-  const [cartItems, setCartItems] = useState<number[]>([]);
+  const [cartItems, setCartItems] = useState<any[]>([]); // Меняем тип на 'any' для хранения полного объекта товара
 
-  const handleAddToCart = (productId: number) => {
-    setCartItems([...cartItems, productId]);
+  const handleAddToCart = (product: { id: number, name: string, price: number, image: string }) => {
+    setCartItems([...cartItems, product]); // Добавляем в корзину полный объект товара
   };
 
   return (
@@ -30,7 +30,7 @@ const Index = () => {
       <header className="bg-secondary shadow-sm">
         <div className="container mx-auto px-2 py-2 flex justify-between items-center">
           <h1 className="text-xl font-bold text-primary">QRIXISSHOP</h1>
-          {/* Используем Link для перехода на страницу корзины */}
+          {/* Передаем в корзину полные данные о товарах */}
           <Link to="/cart" state={{ cartItems }}>
             <CartButton itemCount={cartItems.length} />
           </Link>
@@ -43,8 +43,8 @@ const Index = () => {
             <ProductCard
               key={product.id}
               {...product}
-              onAddToCart={handleAddToCart}
-              isInCart={cartItems.includes(product.id)}
+              onAddToCart={() => handleAddToCart(product)} // Передаем весь объект продукта
+              isInCart={cartItems.some(item => item.id === product.id)} // Проверяем, добавлен ли товар в корзину
             />
           ))}
         </div>

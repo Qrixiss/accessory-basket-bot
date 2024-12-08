@@ -39,14 +39,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <header className="bg-secondary shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary">Аксессуары</h1>
+        <div className="container mx-auto px-2 py-2 flex justify-end">
           <CartButton itemCount={cartItems.length} />
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <main className="container mx-auto px-2 py-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
           {products.map((product) => (
             <ProductCard
               key={product.id}

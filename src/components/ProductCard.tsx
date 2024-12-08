@@ -24,15 +24,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, image, onAdd
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 border border-secondary">
-      <img src={image} alt={name} className="w-full h-48 object-cover" />
-      <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2 text-primary">{name}</h3>
-        <p className="text-primary mb-4">{price} ₽</p>
+      <img src={image} alt={name} className="w-full h-36 object-cover" />
+      <div className="p-2">
+        <h3 className="text-sm font-semibold mb-1 text-primary">{name}</h3>
+        <p className="text-primary text-sm mb-2">{price} ₽</p>
         <Button 
           onClick={handleAddToCart}
-          className="w-full bg-primary hover:bg-primary/90 text-white"
+          className="w-full bg-primary hover:bg-primary/90 text-white text-sm py-1"
+          size="sm"
         >
-          <ShoppingCart className="mr-2 h-4 w-4" />
+          <ShoppingCart className="mr-1 h-3 w-3" />
           В корзину
         </Button>
       </div>

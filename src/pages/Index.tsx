@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '@/components/ProductCard';
 import CartButton from '@/components/CartButton';
@@ -19,10 +19,21 @@ const products = [
 ];
 
 const Index = () => {
-  const [cartItems, setCartItems] = useState<any[]>([]); // Меняем тип на 'any' для хранения полного объекта товара
+  // Загружаем корзину из localStorage при инициализации компонента
+  const loadCartItems = () => {
+    const savedCartItems = localStorage.getItem('cartItems');
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  };
+
+  const [cartItems, setCartItems] = useState<any[]>(loadCartItems);
 
   const handleAddToCart = (product: { id: number, name: string, price: number, image: string }) => {
-    setCartItems([...cartItems, product]); // Добавляем в корзину полный объект товара
+    // Добавляем товар в корзину
+    const updatedCartItems = [...cartItems, product];
+    setCartItems(updatedCartItems);
+    
+    // Сохраняем обновленную корзину в localStorage
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
   return (
